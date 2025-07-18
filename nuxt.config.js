@@ -50,7 +50,7 @@ auth: {
     login: '/auth/signin/',           //redirect user when not connected
     logout: '/auth/signin/',          //redirect user when logout
     callback: '/auth/callback/',      //callback url after login
-    home: '/'                         //after login redirect
+    home: '/',                        //after login redirect
   },
   autofetchUser: false,
   strategies: {
@@ -68,7 +68,7 @@ auth: {
       },
       responseType: "token id_token",
       scope: ["openid", "profile", "email"],
-      redirectUri: "http://localhost:3000/auth/callback",
+      redirectUri: process.env.REDIRECT_URI,
       codeChallengeMethod: "",
     }
   }

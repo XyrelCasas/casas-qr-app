@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="reader" style="width: 500px;"></div>
-    <p>Scanned QR Code: {{ scannedResult }}</p>
+    <p>Upload Qr: {{ scannedResult }}</p>
   </div>
 </template>
 
