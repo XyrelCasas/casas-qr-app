@@ -6,7 +6,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - CASAS,JYNX-XYREL F.',
+    titleTemplate: '%s - CASAS, JYNX-XYREL F',
     title: 'QR Code Scanner',
     htmlAttrs: {
       lang: 'en'
@@ -28,6 +28,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/html5-qrcode.client.js', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -41,7 +42,38 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+  '@nuxtjs/axios',
+  '@nuxtjs/auth-next'
   ],
+auth: {
+  redirect: {
+    login: '/auth/signin/',           //redirect user when not connected
+    logout: '/auth/signin/',          //redirect user when logout
+    callback: '/auth/callback/',      //callback url after login
+    home: '/'                         //after login redirect
+  },
+  autofetchUser: false,
+  strategies: {
+    google: {
+      clientId: '419531366974-3c4o3snrbbm58019fe2elmc1p4of5g9b.apps.googleusercontent.com',
+      scheme: 'oauth2',
+      endpoints: {
+        authorization: "https://accounts.google.com/o/oauth2/auth",
+        userinfo: "https://www.googleapis.com/oauth2/v3/userinfo",
+      },
+      token:{
+        property: "access_token",
+        type: "Bearer",
+        maxAge: 1800,
+      },
+      responseType: "token id_token",
+      scope: ["openid", "profile", "email"],
+      redirectUri: "http://localhost:3000/auth/callback",
+      codeChallengeMethod: "",
+    }
+  }
+},
+
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
